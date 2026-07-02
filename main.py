@@ -100,12 +100,37 @@ def nhap_danh_sach_duoi_file():
     
     return danh_sach_ext
 
+def chuan_hoa_danh_sach_duoi_file(danh_sach_tho):
+    danh_sach_chuan_hoa = []
+
+    for item in danh_sach_tho:
+        # 1. Loại bỏ khoảng trắng thừa (nếu có) và chuyển về chữ thường
+        item_clean = item.strip().lower()
+
+        # 2. Sử dụng hàm kiểm tra ký tự đầu để tự động thêm dấu chấm '.' nếu thiếu
+        if not item_clean.startswith('.'):
+            item_clean = '.' + item_clean
+        
+        # Thêm vào danh sách mới sau khi gọt giũa
+        danh_sach_chuan_hoa.append(item_clean)
+
+    print("-" * 50)
+    print(f"Kết quả chuẩn hóa:")
+    print(f"   + Danh sách gốc : {danh_sach_tho}")
+    print(f"   + Danh sách chuẩn: {danh_sach_chuan_hoa}")
+    print("-" * 50 + "\n")
+
+    return danh_sach_chuan_hoa
+
 # # Đoạn code dùng để chạy thử nghiệm tính năng của riêng Task 3
 if __name__ == "__main__":
-    # --- GIAI ĐOẠN 1: NHẬP LIỆU & TÍNH TOÁN Ổ CỨNG ---
+    # --- GIAI ĐOẠN 1: Ổ CỨNG ---
     tong_dl, da_dung_dl = nhap_dung_luong_o_cung()
     trong_dl, ty_le_dl = tinh_toan_dung_luong(tong_dl, da_dung_dl)
     kiem_tra_canh_bao_dung_luong(ty_le_dl)
     
-    # --- GIAI ĐOẠN 2: XỬ LÝ LOGIC PHÂN LOẠI (Mở đầu bằng Task 6) ---
+    # --- GIAI ĐOẠN 2: XỬ LÝ LOGIC (Task 6 & Task 7) ---
     danh_sach_tho = nhap_danh_sach_duoi_file()
+    
+    # Gọi hàm chuẩn hóa dữ liệu của Task 7
+    danh_sach_chuan = chuan_hoa_danh_sach_duoi_file(danh_sach_tho)
