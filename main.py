@@ -19,7 +19,7 @@ def nhap_dung_luong_o_cung():
         try:
             da_dung = float(input("Nhập số lượng Ổ CỨNG ĐÃ DÙNG (GB): "))
             if da_dung < 0:
-                print("❌ Lỗi: Dung lượng đã dùng không được là số âm. Vui lòng nhập lại!")
+                print("Lỗi: Dung lượng đã dùng không được là số âm. Vui lòng nhập lại!")
                 continue
             break
         except ValueError:
@@ -27,9 +27,34 @@ def nhap_dung_luong_o_cung():
     
     return tong, da_dung
 
+def tinh_toan_dung_luong(tong, da_dung):
+   if da_dung > tong:
+       print("Lỗi logic: Dung lượng đã dùng không thể lớn hơn tổng dung lượng ổ cứng!")
+       return 0.0, 0.0
+   
+   # 1. Tính toán dung lượng trống bằng toán tử trừ (-)
+   dung_luong_trong = tong - da_dung
+
+   # 2. Tính tỉ lệ phần trăm bằng toán tử chia (/) và nhân (*)
+   ty_le_trong = (dung_luong_trong / tong) * 100
+
+   # 3. Hiển thị kết quả (làm tròn 2 chữ số thập phân bằng định dạng :.2f)
+   print("\n" + "-" * 50)
+   print("      KẾT QUẢ PHÂN TÍCH DUNG LƯỢNG Ổ CỨNG")
+   print("-" * 50)
+   print(f"Tổng dung lượng      : {tong:.2f} GB")
+   print(f"Dung lượng đã dùng   : {da_dung:.2f} GB")
+   print(f"Dung lượng còn trống : {dung_luong_trong:.2f} GB")
+   print(f"Tỷ lệ trống          : {ty_le_trong:.2f}%")
+   print("-" * 50)
+
+   return dung_luong_trong, ty_le_trong
+
 # # Đoạn code dùng để chạy thử nghiệm tính năng của riêng Task 3
 if __name__ == "__main__":
+    # Import hoặc gọi trực tiếp hàm từ Task 3 cũ
+    # (Giả định hàm nhap_dung_luong_o_cung đã có sẵn ở trên)
     tong_dl, da_dung_dl = nhap_dung_luong_o_cung()
-    print("-" * 50)
-    print(f"--> [Dữ liệu đã nhận] Tổng: {tong_dl} GB | Đã dùng: {da_dung_dl} GB")
-    print("-" * 50)
+    
+    # Gọi hàm xử lý tính toán của Task 4
+    trong_dl, ty_le_dl = tinh_toan_dung_luong(tong_dl, da_dung_dl)
