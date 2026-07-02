@@ -165,6 +165,35 @@ def phan_loai_danh_sach_file(danh_sach_chuan):
     print("-" * 50)
     return ke_hoach_quy_hoach
 
+def tao_goi_y_va_thong_ke(ke_hoach_quy_hoach):
+    if not ke_hoach_quy_hoach:
+        print("Không có dữ liệu để xử lý gợi ý.")
+        return
+    
+    print("=" * 50)
+    print("      BƯỚC 4: HỆ THỐNG GỢI Ý & THỐNG KÊ (Task 13 & 14)")
+    print("=" * 50)
+
+    tong_so_file = len(ke_hoach_quy_hoach)
+
+    # Sử dụng set để lọc ra danh sách các nhóm độc bản (không trùng lặp)
+    danh_sach_nhom_doc_ban = set()
+    for item in ke_hoach_quy_hoach:
+        danh_sach_nhom_doc_ban.add(item["nhom"])
+    
+    tong_so_nhom = len(danh_sach_nhom_doc_ban)
+
+    print(f"📊 THỐNG KÊ PHIÊN LÀM VIỆC:")
+    print(f"   + Tổng số đuôi mở rộng đã khai báo: {tong_so_file} định dạng.")
+    print(f"   + Tổng số nhóm thư mục cần quy hoạch: {tong_so_nhom} nhóm.")
+    print("-" * 50)
+
+    print("DANH SÁCH LỆNH DI CHUYỂN ĐỀ XUẤT (Gợi ý dọn dẹp):")
+    for stt, item in enumerate(ke_hoach_quy_hoach, start=1):
+        print(f"   {stt}. Định dạng '{item['duoi_file']}' -> Thuộc nhóm: {item['nhom']}")
+        print(f"      Lệnh đề xuất: {item['lenh_de_xuat']}")
+    
+    print("=" * 50 + "\n")
 
 # # Đoạn code dùng để chạy thử nghiệm tính năng của riêng Task 3
 if __name__ == "__main__":
@@ -176,6 +205,7 @@ if __name__ == "__main__":
     # --- GIAI ĐOẠN 2: XỬ LÝ LOGIC ---
     danh_sach_tho = nhap_danh_sach_duoi_file()
     danh_sach_chuan = chuan_hoa_danh_sach_duoi_file(danh_sach_tho)
-    
-    # Gọi hàm phân loại (Hiện tại đang kích hoạt logic Task 8)
     ket_qua_quy_hoach = phan_loai_danh_sach_file(danh_sach_chuan)
+    
+    # --- GIAI ĐOẠN 3: GỢI Ý & THỐNG KÊ (Task 13 & 14) ---
+    tao_goi_y_va_thong_ke(ket_qua_quy_hoach)
