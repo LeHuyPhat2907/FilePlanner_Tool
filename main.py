@@ -50,11 +50,30 @@ def tinh_toan_dung_luong(tong, da_dung):
 
    return dung_luong_trong, ty_le_trong
 
+def kiem_tra_canh_bao_dung_luong(ty_le_trong):
+    print("\n" + "=" * 50)
+    print("      KẾT QUẢ KIỂM TRA TRẠNG THÁI Ổ CỨNG")
+    print("=" * 50)
+
+    # Áp dụng cấu trúc điều kiện if để kiểm tra tỷ lệ trống dưới 10%
+    if ty_le_trong < 10.0:
+        print("CẢNH BÁO NGHUY HIỂM: DUNG LƯỢNG TRỐNG CÒN DƯỚI 10%!")
+        print("Ổ cứng của bạn đang ở trạng thái quá tải và cực kỳ bừa bộn.")
+        print("Hiệu suất hệ thống có thể bị giảm sút nghiêm trọng.")
+        print("ĐỀ XUẤT: Hãy tiến hành quy hoạch và dọn dẹp file ngay lập tức!")
+    else:
+        print("TRẠNG THÁI: Dung lượng ổ cứng hiện tại vẫn nằm trong mức an toàn.")
+        print("Bạn có thể tiếp tục lên kế hoạch sắp xếp các nhóm file gọn gàng hơn.")
+        
+    print("=" * 50 + "\n")
+
 # # Đoạn code dùng để chạy thử nghiệm tính năng của riêng Task 3
 if __name__ == "__main__":
-    # Import hoặc gọi trực tiếp hàm từ Task 3 cũ
-    # (Giả định hàm nhap_dung_luong_o_cung đã có sẵn ở trên)
+    # 1. Gọi hàm Task 3 (Nhập liệu)
     tong_dl, da_dung_dl = nhap_dung_luong_o_cung()
     
-    # Gọi hàm xử lý tính toán của Task 4
+    # 2. Gọi hàm Task 4 (Tính toán)
     trong_dl, ty_le_dl = tinh_toan_dung_luong(tong_dl, da_dung_dl)
+    
+    # 3. Gọi hàm Task 5 (Cảnh báo điều kiện)
+    kiem_tra_canh_bao_dung_luong(ty_le_dl)
