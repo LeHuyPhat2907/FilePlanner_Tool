@@ -195,17 +195,72 @@ def tao_goi_y_va_thong_ke(ke_hoach_quy_hoach):
     
     print("=" * 50 + "\n")
 
-# # Đoạn code dùng để chạy thử nghiệm tính năng của riêng Task 3
-if __name__ == "__main__":
-    # --- GIAI ĐOẠN 1: Ổ CỨNG ---
+def hien_thi_menu_chao_mung():
+    print("\n" + "*" * 60)
+    print("*" + " " * 58 + "*")
+    print("*" + "    TRỢ LÝ TỰ ĐỘNG LÊN KẾ HOẠCH QUY HOẠCH & DỌN DẸP FILE    " + "*")
+    print("*" + "               --- FILE PLANNER TOOL v1.0 ---             " + "*")
+    print("*" + " " * 58 + "*")
+    print("*" * 60)
+    print(" Chào mừng bạn! Hãy khai báo thông tin để nhận sơ đồ dọn dẹp.\n")
+
+def xuat_bao_cao_tong_ket(ke_hoach_quy_hoach):
+    if not ke_hoach_quy_hoach:
+        print("Không có dữ liệu để xuất báo cáo.")
+        return
+
+    print("\n" + "=" * 65)
+    print("        BÁO CÁO SƠ ĐỒ KẾ HOẠCH QUY HOẠCH Ổ CỨNG TỔNG THỂ")
+    print("=" * 65)
+    
+    # Định dạng tiêu đề cột cho bảng Console
+    print(f"{'STT':<5} | {'Định Dạng':<12} | {'Nhóm Thư Mục Đích':<20} | {'Trạng Thái'}")
+    print("-" * 65)
+
+    # Duyệt in từng dòng dữ liệu trong bảng
+    for idx, item in enumerate(ke_hoach_quy_hoach, start=1):
+        ext = item["duoi_file"]
+        nhom = item["nhom"]
+        
+        # Tạo nhãn trạng thái trực quan
+        if nhom == "[File_Khac]":
+            trang_thai = "Cần phân loại thủ công thêm"
+        else:
+            trang_thai = "Đã sẵn sàng di chuyển"
+
+        print(f"{idx:<5} | {ext:<12} | {nhom:<20} | {trang_thai}")
+
+    print("-" * 65)
+    print("Lời khuyên: Hãy tạo các thư mục đích tương ứng trên ổ cứng của bạn")
+    print("   và chạy các câu lệnh gợi ý (ở Bước 4) để hoàn tất việc dọn dẹp!")
+    print("=" * 65 + "\n")
+
+# Tái cấu trúc lại hàm main() chạy chính để tích hợp toàn bộ 16 Task đã làm
+def main():
+    # 1. Menu chào mừng (Task 15)
+    hien_thi_menu_chao_mung()
+    
+    # 2. Khối nhập liệu & Tính toán ổ cứng (Task 3, 4, 5)
     tong_dl, da_dung_dl = nhap_dung_luong_o_cung()
     trong_dl, ty_le_dl = tinh_toan_dung_luong(tong_dl, da_dung_dl)
     kiem_tra_canh_bao_dung_luong(ty_le_dl)
     
-    # --- GIAI ĐOẠN 2: XỬ LÝ LOGIC ---
+    # 3. Vòng lặp nhận danh sách và chuẩn hóa (Task 6, 7)
     danh_sach_tho = nhap_danh_sach_duoi_file()
+    if not danh_sach_tho:
+        print("Bye bye! Bạn không nhập đuôi file nào.")
+        return
+        
     danh_sach_chuan = chuan_hoa_danh_sach_duoi_file(danh_sach_tho)
+    
+    # 4. Phân loại cốt lõi (Task 8 -> 12)
     ket_qua_quy_hoach = phan_loai_danh_sach_file(danh_sach_chuan)
     
-    # --- GIAI ĐOẠN 3: GỢI Ý & THỐNG KÊ (Task 13 & 14) ---
+    # 5. Thống kê & Lệnh gợi ý (Task 13, 14)
     tao_goi_y_va_thong_ke(ket_qua_quy_hoach)
+    
+    # 6. Xuất báo cáo tổng kết dạng bảng (Task 16)
+    xuat_bao_cao_tong_ket(ket_qua_quy_hoach)
+
+if __name__ == "__main__":
+    main()
