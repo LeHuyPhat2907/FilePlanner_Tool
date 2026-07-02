@@ -142,17 +142,29 @@ def phan_loai_danh_sach_file(danh_sach_chuan):
             # Sinh câu lệnh di chuyển giả lập trên Windows/Console làm gợi ý
             ket_qua_item["lenh_de_xuat"] = f"move *{ext} D:\\Hinh_Anh\\"
             print(f"Phát hiện nhóm HÌNH ẢNH: Đuôi {ext} -> Gom vào [Hinh_Anh]")
+        elif ext in ['.docx', '.pdf', '.xlsx', '.pptx', '.txt']:
+            ket_qua_item["nhom"] = "[Tai_Lieu]"
+            ket_qua_item["lenh_de_xuat"] = f"move *{ext} D:\\Tai_Lieu\\"
+            print(f"[TÀI LIỆU] Đuôi {ext} -> Gom vào [Tai_Lieu]")
+        elif ext in ['.exe', '.msi', '.dmg', '.apk']:
+            ket_qua_item["nhom"] = "[Cai_Dat_Phan_Mem]"
+            ket_qua_item["lenh_de_xuat"] = f"move *{ext} D:\\Cai_Dat_Phan_Mem\\"
+            print(f"[BỘ CÀI PHẦN MỀM] Đuôi {ext} -> Gom vào [Cai_Dat_Phan_Mem]")
+        elif ext in ['.mp4', '.mkv', '.avi', '.mov']:
+            ket_qua_item["nhom"] = "[Video_Phim]"
+            ket_qua_item["lenh_de_xuat"] = f"move *{ext} D:\\Video_Phim\\"
+            print(f"[VIDEO & PHIM] Đuôi {ext} -> Gom vào [Video_Phim]")
         else:
-            # Tạm thời các đuôi chưa phân loại ở Task 8 sẽ được đánh dấu là chưa rõ
-            ket_qua_item["nhom"] = "[Chua_Phan_Loai]"
-            ket_qua_item["lenh_de_xuat"] = "Chờ cập nhật bộ lọc..."
-            print(f"Đuôi {ext} chưa thuộc nhóm Hình Ảnh (Sẽ xử lý ở các task sau).")
+            ket_qua_item["nhom"] = "[File_Khac]"
+            ket_qua_item["lenh_de_xuat"] = f"move *{ext} D:\\File_Khac\\"
+            print(f"[FILE KHÁC] Đuôi {ext} -> Gom tạm vào [File_Khac] để phân loại sau")
         
         # Lưu item vào danh sách kế hoạch tổng
         ke_hoach_quy_hoach.append(ket_qua_item)
     
     print("-" * 50)
     return ke_hoach_quy_hoach
+
 
 # # Đoạn code dùng để chạy thử nghiệm tính năng của riêng Task 3
 if __name__ == "__main__":
