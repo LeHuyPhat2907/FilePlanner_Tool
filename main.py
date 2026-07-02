@@ -67,13 +67,45 @@ def kiem_tra_canh_bao_dung_luong(ty_le_trong):
         
     print("=" * 50 + "\n")
 
+def nhap_danh_sach_duoi_file():
+    print("=" * 50)
+    print("      BƯỚC 2: KHAI BÁO CÁC ĐUÔI FILE CẦN GOM NHÓM")
+    print("=" * 50)
+    print("Hướng dẫn: Nhập từng đuôi file (Ví dụ: .png, docx, .mp4)")
+    print("Nhấn phím 'q' và Enter để HOÀN THÀNH việc khai báo.")
+    print("-" * 50)
+
+    danh_sach_ext = [] # Khởi tạo danh sách trống để lưu trữ dữ liệu đầu vào
+
+    while True:
+        # Nhập dữ liệu đầu vào và dùng .strip() để xóa khoảng trắng thừa ở 2 đầu
+        nhap_vao = input("Nhập đuôi mở rộng (hoặc 'q' để dừng): ").strip()
+
+        # Kiểm tra điều kiện thoát vòng lặp
+        if nhap_vao.lower() == "q":
+            print("\nĐã dừng nhận dữ liệu đầu vào từ người dùng.")
+            break
+
+        # Kiểm tra nếu người dùng không nhập gì mà chỉ bấm Enter
+        if nhap_vao == "":
+            print("Bạn chưa nhập gì cả. Vui lòng nhập đuôi file hoặc gõ 'q'!")
+            continue
+
+        # Thêm đuôi file vừa nhập vào danh sách lưu trữ
+        danh_sach_ext.append(nhap_vao)
+        print(f"Đã ghi nhận: '{nhap_vao}' (Tổng số trong hàng đợi: {len(danh_sach_ext)})")
+
+    print(f"Danh sách đuôi file thô vừa thu thập: {danh_sach_ext}")
+    print("=" * 50 + "\n")
+    
+    return danh_sach_ext
+
 # # Đoạn code dùng để chạy thử nghiệm tính năng của riêng Task 3
 if __name__ == "__main__":
-    # 1. Gọi hàm Task 3 (Nhập liệu)
+    # --- GIAI ĐOẠN 1: NHẬP LIỆU & TÍNH TOÁN Ổ CỨNG ---
     tong_dl, da_dung_dl = nhap_dung_luong_o_cung()
-    
-    # 2. Gọi hàm Task 4 (Tính toán)
     trong_dl, ty_le_dl = tinh_toan_dung_luong(tong_dl, da_dung_dl)
-    
-    # 3. Gọi hàm Task 5 (Cảnh báo điều kiện)
     kiem_tra_canh_bao_dung_luong(ty_le_dl)
+    
+    # --- GIAI ĐOẠN 2: XỬ LÝ LOGIC PHÂN LOẠI (Mở đầu bằng Task 6) ---
+    danh_sach_tho = nhap_danh_sach_duoi_file()
