@@ -21,6 +21,9 @@ def nhap_dung_luong_o_cung():
             if da_dung < 0:
                 print("Lỗi: Dung lượng đã dùng không được là số âm. Vui lòng nhập lại!")
                 continue
+            if da_dung > tong:
+                print("Lỗi logic: Dung lượng đã dùng ({da_dung} GB) không thể lớn hơn tổng dung lượng ({tong} GB). Vui lòng nhập lại!")
+                continue
             break
         except ValueError:
             print("Lỗi: Vui lòng chỉ nhập số ký tự thuần túy (Ví dụ: 120, 80.4)!")
@@ -28,10 +31,6 @@ def nhap_dung_luong_o_cung():
     return tong, da_dung
 
 def tinh_toan_dung_luong(tong, da_dung):
-   if da_dung > tong:
-       print("Lỗi logic: Dung lượng đã dùng không thể lớn hơn tổng dung lượng ổ cứng!")
-       return 0.0, 0.0
-   
    # 1. Tính toán dung lượng trống bằng toán tử trừ (-)
    dung_luong_trong = tong - da_dung
 
@@ -183,7 +182,7 @@ def tao_goi_y_va_thong_ke(ke_hoach_quy_hoach):
     
     tong_so_nhom = len(danh_sach_nhom_doc_ban)
 
-    print(f"📊 THỐNG KÊ PHIÊN LÀM VIỆC:")
+    print(f"THỐNG KÊ PHIÊN LÀM VIỆC:")
     print(f"   + Tổng số đuôi mở rộng đã khai báo: {tong_so_file} định dạng.")
     print(f"   + Tổng số nhóm thư mục cần quy hoạch: {tong_so_nhom} nhóm.")
     print("-" * 50)
